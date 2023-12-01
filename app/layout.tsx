@@ -6,6 +6,7 @@ import Sidebar from '@/components/sidebar';
 import SupabaseProvider from '@/providers/supabase-provider';
 import UserProvider from '@/providers/user-provider';
 import ModalProvider from '@/providers/modal-provider';
+import ToastProvider from '@/providers/toast-provider';
 
 const font = Figtree({ subsets: ['latin'] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={font.className}>
+        <ToastProvider />
         <SupabaseProvider>
           <UserProvider>
             <ModalProvider />
