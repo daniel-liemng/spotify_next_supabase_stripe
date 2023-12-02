@@ -7,6 +7,7 @@ import SupabaseProvider from '@/providers/supabase-provider';
 import UserProvider from '@/providers/user-provider';
 import ModalProvider from '@/providers/modal-provider';
 import ToastProvider from '@/providers/toast-provider';
+import { getSongsByUserId } from '@/actions/get-songs-by-userid';
 
 const font = Figtree({ subsets: ['latin'] });
 
@@ -15,11 +16,11 @@ export const metadata: Metadata = {
   description: 'Spotify | Next',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export const revalidate = 0;
+
+const RootLayout = async ({ children }: { children: React.ReactNode }) => {
+  const userSongs = await getSongsByUserId();
+
   return (
     <html lang='en'>
       <body className={font.className}>
@@ -27,10 +28,12 @@ export default function RootLayout({
         <SupabaseProvider>
           <UserProvider>
             <ModalProvider />
-            <Sidebar>{children}</Sidebar>
+            <Sidebar songs={userSongs}>{children}</Sidebar>
           </UserProvider>
         </SupabaseProvider>
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
