@@ -3,9 +3,26 @@
 import { TbPlaylist } from 'react-icons/tb';
 import { AiOutlinePlus } from 'react-icons/ai';
 
+import { useAuthModal } from '@/hooks/use-auth-modal';
+import { useUser } from '@/hooks/use-user';
+import { useUploadModal } from '@/hooks/use-upload-modal';
+
 const Library = () => {
+  const authModal = useAuthModal();
+  const uploadModal = useUploadModal();
+
+  const { user } = useUser();
+
   // handle upload
-  const onClick = () => {};
+  const onClick = () => {
+    if (!user) {
+      return authModal.onOpen();
+    }
+
+    // check for Subscription
+
+    return uploadModal.onOpen();
+  };
   return (
     <div className='flex flex-col'>
       <div className='flex items-center justify-between px-5 py-4'>
