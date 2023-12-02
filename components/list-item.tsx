@@ -15,7 +15,7 @@ const ListItem = ({ image, name, href }: ListItemProps) => {
 
   // authentication
   const onClick = () => {
-    router.push('/');
+    router.push(href);
   };
 
   return (

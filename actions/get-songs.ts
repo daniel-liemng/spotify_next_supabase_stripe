@@ -14,6 +14,7 @@ export const getSongs = async (): Promise<Song[]> => {
 
   if (error) {
     console.log(error);
+    return [];
   }
 
   return (data as any) || [];
