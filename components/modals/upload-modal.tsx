@@ -43,7 +43,6 @@ const UploadModal = () => {
   };
 
   const onSubmit: SubmitHandler<FieldValues> = async (values) => {
-    console.log(values);
     try {
       setIsLoading(true);
 
@@ -94,9 +93,6 @@ const UploadModal = () => {
         setIsLoading(false);
         return toast.error('Failed image upload');
       }
-
-      console.log('AAA', songData);
-      console.log('BBB', imageData);
 
       // save song
       const { error: supabaseError } = await supabaseClient
