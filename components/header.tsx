@@ -12,6 +12,7 @@ import Button from './button';
 import { useAuthModal } from '@/hooks/use-auth-modal';
 import { useUser } from '@/hooks/use-user';
 import toast from 'react-hot-toast';
+import { usePlayer } from '@/hooks/use-player';
 
 interface HeaderProps {
   children: React.ReactNode;
@@ -27,10 +28,13 @@ const Header = ({ children, className }: HeaderProps) => {
 
   const { user } = useUser();
 
+  const player = usePlayer();
+
   const handleLogout = async () => {
     const { error } = await supabaseClient.auth.signOut();
 
     // reset any playing songs
+    player.reset();
 
     router.refresh();
 
